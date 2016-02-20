@@ -4,7 +4,14 @@ import android.content.Context;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.HttpClientStack;
+import com.android.volley.toolbox.HttpStack;
 import com.android.volley.toolbox.Volley;
+
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.HttpParams;
 
 /**
  * Created by Rishab on 18-02-2016.
@@ -22,6 +29,7 @@ public class SingletonNetworkClass {
 
     public static synchronized SingletonNetworkClass getInstance(Context context) {
         if (single_netwrk == null) {
+
             single_netwrk = new SingletonNetworkClass(context);
         }
         return single_netwrk;
@@ -30,7 +38,16 @@ public class SingletonNetworkClass {
     //get the request queue
     public RequestQueue getRequestQueue() {
         if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(mcontext.getApplicationContext());
+            DefaultHttpClient mDefaultHttpClient = new DefaultHttpClient();
+
+            final ClientConnectionManager mClientConnectionManager = mDefaultHttpClient.getConnectionManager();
+            final HttpParams mHttpParams = mDefaultHttpClient.getParams();
+            final ThreadSafeClientConnManager mThreadSafeClientConnManager = new ThreadSafeClientConnManager( mHttpParams, mClientConnectionManager.getSchemeRegistry() );
+
+            mDefaultHttpClient = new DefaultHttpClient( mThreadSafeClientConnManager, mHttpParams );
+
+            final HttpStack httpStack = new HttpClientStack( mDefaultHttpClient );
+            requestQueue = Volley.newRequestQueue(mcontext.getApplicationContext(), httpStack);
         }
         return requestQueue;
     }
