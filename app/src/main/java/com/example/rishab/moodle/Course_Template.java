@@ -19,15 +19,22 @@ public class Course_Template extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course__template);
+
+
         ImageButton button1 = (ImageButton)findViewById(R.id.b1);
         ImageButton button2 = (ImageButton)findViewById(R.id.b2);
         ImageButton button3 = (ImageButton)findViewById(R.id.b3);
+
         TextView t = (TextView)findViewById(R.id.t1);
+
         Intent intent_r = getIntent();
-        final String message = intent_r.getStringExtra("coursecode");
-        t.setText(message);
-        String server = "localhost:8000";
+        final String message = intent_r.getStringExtra("coursecode");//Receiving course code as the identifier
+        t.setText(message);//setting course code on top
+
+        //String server = "localhost:8000";
         //Json_Returning obj = new Json_Returning;
+        //Assignment button intended to lead to list of assignments related to course
+
         button1.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v){
@@ -37,14 +44,17 @@ public class Course_Template extends ActionBarActivity {
                         //String URL = server + "/courses/course.json/coursecode/assignment";
                         //JSONObject data_received = obj.Data_Received(URL);
                         //use JSON object
-                        Intent intent_s = new Intent(Course_Template.this, Course_Assignments.class);
-                        intent_s.putExtra("coursecode1", message);
-                        Request1 req = new Request1(intent_s,Course_Template.this,"/courses/course.json/"+message+"/assignment");
+                        Intent intent_s = new Intent(Course_Template.this, Course_Assignments.class);//
+                        intent_s.putExtra("coursecode1", message);//course code message
+                        Request1 req = new Request1(intent_s,Course_Template.this,"/courses/course.json/"+message+"/assignment");//course assignment api
                         req.request();
                         //startActivity(intent_s);
                     }
                 }
         );
+
+
+        //Grades button intended to lead to showing grade components of the course
         button2.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v){
@@ -55,13 +65,16 @@ public class Course_Template extends ActionBarActivity {
                         //JSONObject data_received = obj.Data_Received(URL);
                         //use JSON object
                         Intent intent_s = new Intent(Course_Template.this, Course_Grade.class);
-                        intent_s.putExtra("coursecode2", message);
-                        Request1 req = new Request1(intent_s,Course_Template.this,"/courses/course.json/"+message+"/grades");
+                        intent_s.putExtra("coursecode2", message);//course code message
+                        Request1 req = new Request1(intent_s,Course_Template.this,"/courses/course.json/"+message+"/grades");//course grade api
                         req.request();
                         //startActivity(intent_s);
                     }
                 }
         );
+
+
+        //Threads button intended to lead to list of threads related to course
         button3.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v){
@@ -72,8 +85,8 @@ public class Course_Template extends ActionBarActivity {
                         //JSONObject data_received = obj.Data_Received(URL);
                         //use JSON object
                         Intent intent_s = new Intent(Course_Template.this, CommentList.class);
-                        intent_s.putExtra("coursecode3", message);
-                        Request1 req = new Request1(intent_s,Course_Template.this,"/courses/course.json/"+message+"/threads");
+                        intent_s.putExtra("coursecode3", message);//course code message
+                        Request1 req = new Request1(intent_s,Course_Template.this,"/courses/course.json/"+message+"/threads");//course threads api
                         req.request();
                         //startActivity(intent_s);
                     }
