@@ -171,7 +171,7 @@ public class Course_Assignments extends ActionBarActivity {
                 {
                     e.printStackTrace();
                 }
-                
+
                 startActivity(in);
             }
         });
