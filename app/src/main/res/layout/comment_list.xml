@@ -4,8 +4,19 @@
     android:layout_height="match_parent">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/title"
+        android:textStyle="bold"
+        android:textSize="40dp"
+        android:text="this isne thread"
+        android:layout_marginLeft="10dp" />
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:id="@+id/Description"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textSize="30dp"
+        android:layout_marginLeft="30dp"
+        android:text="ascvb" />
 </LinearLayout>
