@@ -23,11 +23,18 @@ public class Course_Grade extends ActionBarActivity {
         setContentView(R.layout.activity_course__grade);
         Intent intent_r = getIntent();
         String message = intent_r.getStringExtra("coursecode2");
-        String URL = "/courses/course.json/"+message+"/grades";
-        Request a = new Request(this,URL);
-        a.request();
-        while(a.data==null){}
-        JSONObject data_received = a.data;
+        //String URL = "/courses/course.json/"+message+"/grades";
+        JSONObject data_received = new JSONObject();
+        String js = intent_r.getStringExtra("data");
+        try{data_received = new JSONObject(js);}
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        //Request a = new Request(this,URL);
+        //a.request();
+        //while(a.data==null){}
+        //JSONObject data_received = a.data;
         //JSON
         //JSONObject data_received = obj.Data_Received(URL);
         TextView textview1 = (TextView)findViewById(R.id.t1);

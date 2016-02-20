@@ -39,7 +39,9 @@ public class Course_Template extends ActionBarActivity {
                         //use JSON object
                         Intent intent_s = new Intent(Course_Template.this, Course_Assignments.class);
                         intent_s.putExtra("coursecode1", message);
-                        startActivity(intent_s);
+                        Request1 req = new Request1(intent_s,Course_Template.this,"/courses/course.json/"+message+"/assignment");
+                        req.request();
+                        //startActivity(intent_s);
                     }
                 }
         );
@@ -54,7 +56,9 @@ public class Course_Template extends ActionBarActivity {
                         //use JSON object
                         Intent intent_s = new Intent(Course_Template.this, Course_Grade.class);
                         intent_s.putExtra("coursecode2", message);
-                        startActivity(intent_s);
+                        Request1 req = new Request1(intent_s,Course_Template.this,"/courses/course.json/"+message+"/grades");
+                        req.request();
+                        //startActivity(intent_s);
                     }
                 }
         );
@@ -69,7 +73,9 @@ public class Course_Template extends ActionBarActivity {
                         //use JSON object
                         Intent intent_s = new Intent(Course_Template.this, CommentList.class);
                         intent_s.putExtra("coursecode3", message);
-                        startActivity(intent_s);
+                        Request1 req = new Request1(intent_s,Course_Template.this,"/courses/course.json/"+message+"/threads");
+                        req.request();
+                        //startActivity(intent_s);
                     }
                 }
         );

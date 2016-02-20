@@ -42,11 +42,17 @@ public class Course_Assignments extends ActionBarActivity {
         ListView listView = (ListView)findViewById(R.id.list);
         Intent intent_r = getIntent();
         String message = intent_r.getStringExtra("coursecode1");
-        String URL = "/courses/course.json/"+message+"/assignment";
-        Request a = new Request(this,URL);
-        a.request();
-        while(a.data==null){}
-        JSONObject data_received = a.data;
+        JSONObject data_received = new JSONObject();
+        String js = intent_r.getStringExtra("data");
+        //String URL = "/courses/course.json/"+message+"/assignment";
+        //Request a = new Request(this,URL);
+        //a.request();
+        //while(a.data==null){}
+        try{data_received = new JSONObject(js);}
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
         //String data_string = data_received.toString();
         //use JSONObject
 
@@ -126,7 +132,9 @@ public class Course_Assignments extends ActionBarActivity {
                 catch(JSONException e){
                     e.printStackTrace();
                 }
-                startActivity(in);
+                Request1 req = new Request1(in,Course_Assignments.this,"");
+                req.request();
+                //startActivity(in);
             }
         });
 

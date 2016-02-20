@@ -44,11 +44,11 @@
         </activity>
         <activity
             android:name=".Course_Template"
-            android:label="Course_Template" >
+            android:label="Course Components" >
         </activity>
         <activity
             android:name=".Course_Assignments"
-            android:label="Course_Assignments" >
+            android:label="Course Assignments" >
         </activity>
         <activity
             android:name=".Course_Grade"

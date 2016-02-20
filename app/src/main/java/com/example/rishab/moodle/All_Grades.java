@@ -26,11 +26,18 @@ public class All_Grades extends ActionBarActivity {
         setContentView(R.layout.activity_all__grades);
         ListView listView = (ListView)findViewById(R.id.list2);
         Intent intent_r = getIntent();
-        String URL = "/default/grades.json";
-        Request a = new Request(this,URL);
-        a.request();
-        while(a.data==null){}
-        JSONObject data_received = a.data;
+        JSONObject data_received = new JSONObject();
+        String js = intent_r.getStringExtra("data");
+        try{data_received = new JSONObject(js);}
+        catch(JSONException e)
+        {
+            e.printStackTrace();
+        }
+        //String URL = "/default/grades.json";
+        //Request a = new Request(this,URL);
+        //a.request();
+        //while(a.data==null){}
+        //JSONObject data_received = a.data;
         ArrayList<HashMap<String, String>> gradelist = new ArrayList<HashMap<String, String>>();
         String newline = System.getProperty("line.separator");
         int no_of_courses=0;
